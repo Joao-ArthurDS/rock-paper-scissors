@@ -1,6 +1,10 @@
 let HumanScore = 0;
 let ComputerScore = 0;
 
+const button = document.querySelectorAll('.choice');
+
+button.forEach((btn) => { btn.addEventListener('click', (e) => playGame(e.target.id)) });
+
 function getComputerChoice()
 {
     let c_choice;
@@ -16,10 +20,10 @@ function getComputerChoice()
     return c_choice;
 }
 
-function getHumanChoice()
+function getHumanChoice(btn_choice)
 {
-    let h_choice = prompt("Rock paper or scissors?").toLowerCase();
-    return h_choice;
+    //let h_choice = prompt("Rock paper or scissors?").toLowerCase();
+    return btn_choice;
 }
 
 function playRound(HumanChoice, ComputerChoice)
@@ -29,7 +33,7 @@ function playRound(HumanChoice, ComputerChoice)
     }
     else if (HumanChoice == "rock" && ComputerChoice == "scissors")
     {
-        console.log("You win, Rock beats scissors!");
+        console.log("You win, Rock beats Scissors!");
         HumanScore +=1;
     } 
     else if (HumanChoice == "paper" && ComputerChoice == "rock")
@@ -50,14 +54,14 @@ function playRound(HumanChoice, ComputerChoice)
 
 }
 
-function playGame(){
-    for (let i = 0; i < 5; i++)
-    {    
-        const HumanSelection = getHumanChoice();
-        const ComputerSelection = getComputerChoice();
+function playGame(btn_choice){
+    
+    const HumanSelection = getHumanChoice(String(btn_choice).toLowerCase());
+    
+    const ComputerSelection = getComputerChoice();
 
-        playRound(HumanSelection,ComputerSelection);
-    }
+    playRound(HumanSelection,ComputerSelection);
+    
 
 }
 
