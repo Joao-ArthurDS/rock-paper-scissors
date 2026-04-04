@@ -6,11 +6,14 @@ divResult.style["color"] = "black";
 divResult.style["font-size"] = "50px";  
 divResult.style["justify"] = "center";
 divResult.style["justify-content"] = "center";
-divResult.style["align-items"] = "center"; 
+divResult.style["align-items"] = "center";
+divResult.style["margin"] = "0"; 
+divResult.style["padding"] = "0";
+divResult.innerHTML = "To start a new game, select rock paper or scissors.";
 
 const button = document.querySelectorAll('.choice');
 
-button.forEach((btn) => { btn.addEventListener('click', (e) => { playGame(e.target.id) }) });
+button.forEach((btn) => { btn.addEventListener("click", (e) => { playGame(e.target.id) }) });
 button.forEach((btn) => { btn.setAttribute("style", "height: 100px; width: 150px;")});
 
 function getComputerChoice()
@@ -38,25 +41,30 @@ function playRound(HumanChoice, ComputerChoice)
 {
     if (HumanChoice == ComputerChoice){
         console.log("Draw");
+        divResult.innerHTML += "<br>Draw";
     }
     else if (HumanChoice == "rock" && ComputerChoice == "scissors")
     {
         console.log("You win, Rock beats Scissors!");
+        divResult.innerHTML += "<br>You win, Rock beats Scissors!";
         HumanScore +=1;
     } 
     else if (HumanChoice == "paper" && ComputerChoice == "rock")
     {
         console.log("You win, Paper beats Rock!");
+        divResult.innerHTML += "<br>You win, Paper beats Rock!";
         HumanScore +=1;
     } 
     else if (HumanChoice == "scissors" && ComputerChoice == "paper")
     {
         console.log("You win, Scissors beats Paper!");
+        divResult.innerHTML += "<br>ou win, Scissors beats Paper!";
         HumanScore +=1;
     } 
     else
     {
         console.log(`You lose, ${ComputerChoice} beats ${HumanChoice}`);
+        divResult.innerHTML += `<br>You lose, ${ComputerChoice} beats ${HumanChoice}`;
         ComputerScore +=1;
     }   
 
@@ -86,10 +94,13 @@ function playGame(btn_choice){
         const ComputerSelection = getComputerChoice();
 
         playRound(HumanSelection,ComputerSelection);
+        
+        const lines = divResult.innerHTML.split('<br>');
+        lines[0] = "Player "+String(HumanScore) + "  -   Computer "+String(ComputerScore);
+        divResult.innerHTML = lines.join(`<br>`)
+
     } else {
         endGame(HumanScore,ComputerScore);
     }
 
 }
-
-playGame();
