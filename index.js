@@ -1,9 +1,17 @@
 let HumanScore = 0;
 let ComputerScore = 0;
+const divResult = document.querySelector("div#result");
+
+divResult.style["color"] = "black";
+divResult.style["font-size"] = "50px";  
+divResult.style["justify"] = "center";
+divResult.style["justify-content"] = "center";
+divResult.style["align-items"] = "center"; 
 
 const button = document.querySelectorAll('.choice');
 
 button.forEach((btn) => { btn.addEventListener('click', (e) => { playGame(e.target.id) }) });
+button.forEach((btn) => { btn.setAttribute("style", "height: 100px; width: 150px;")});
 
 function getComputerChoice()
 {
@@ -55,12 +63,24 @@ function playRound(HumanChoice, ComputerChoice)
 }
 
 function endGame(h_score, c_score){
-    
+    if (h_score == 5){
+        divResult.style["background-color"] = "green";    
+        divResult.innerHTML = "YOU WON!!!<br>To start a new game, select rock paper or scissors.";
+    } else {
+        divResult.style["background-color"] = "red"; 
+        divResult.innerHTML = "computer won :(<br>To start a new game, select rock paper or scissors.";
+    }
+    HumanScore = 0;
+    ComputerScore = 0;
 }
 
 function playGame(btn_choice){
     
     if ((HumanScore != 5) && (ComputerScore != 5)) {
+        
+        divResult.style["background-color"] = "white";    
+        divResult.innerHTML = "Player "+String(HumanScore) + "  -   Computer "+String(ComputerScore);
+        
         const HumanSelection = getHumanChoice(String(btn_choice).toLowerCase());
         
         const ComputerSelection = getComputerChoice();
