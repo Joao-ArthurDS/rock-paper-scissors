@@ -3,7 +3,7 @@ let ComputerScore = 0;
 
 const button = document.querySelectorAll('.choice');
 
-button.forEach((btn) => { btn.addEventListener('click', (e) => playGame(e.target.id)) });
+button.forEach((btn) => { btn.addEventListener('click', (e) => { playGame(e.target.id) }) });
 
 function getComputerChoice()
 {
@@ -54,14 +54,21 @@ function playRound(HumanChoice, ComputerChoice)
 
 }
 
+function endGame(h_score, c_score){
+    
+}
+
 function playGame(btn_choice){
     
-    const HumanSelection = getHumanChoice(String(btn_choice).toLowerCase());
-    
-    const ComputerSelection = getComputerChoice();
+    if ((HumanScore != 5) && (ComputerScore != 5)) {
+        const HumanSelection = getHumanChoice(String(btn_choice).toLowerCase());
+        
+        const ComputerSelection = getComputerChoice();
 
-    playRound(HumanSelection,ComputerSelection);
-    
+        playRound(HumanSelection,ComputerSelection);
+    } else {
+        endGame(HumanScore,ComputerScore);
+    }
 
 }
 
